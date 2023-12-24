@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 class Disbursement < ApplicationRecord
   belongs_to :merchant
+  has_many :orders, dependent: :nullify
 
   validates :amount, presence: true, numericality: { greater_than: 0 }
   validates :commission, presence: true, numericality: { greater_than_or_equal_to: 0 }

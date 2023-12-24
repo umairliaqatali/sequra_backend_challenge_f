@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 class Merchant < ApplicationRecord
+  has_many :orders, dependent: :destroy
   has_many :disbursements, dependent: :destroy
 
   validates :reference, presence: true
