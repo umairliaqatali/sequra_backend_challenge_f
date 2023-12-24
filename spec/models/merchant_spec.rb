@@ -11,8 +11,17 @@ RSpec.describe Merchant, type: :model do
     }
   end
 
+  subject { described_class.new(valid_attributes) }
+
+  describe 'associations' do
+    it 'has many disbursements' do
+      expect(subject).to respond_to(:disbursements)
+      expect(subject.disbursements.build).to be_a(Disbursement)
+    end
+  end
+
+
   describe 'validations' do
-    subject { described_class.new(valid_attributes) }
 
     it 'is valid with valid attributes' do
       expect(subject).to be_valid
