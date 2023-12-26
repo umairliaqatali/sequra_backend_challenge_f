@@ -70,5 +70,27 @@ RSpec.describe Order, type: :model do
       expect(order_without_disbursement.disbursement).to be_nil
     end
 
+    #using factory_bot for complex scenarios and improve readability
+    context 'custom validations' do
+      let(:merchant) { create(:merchant, live_on: Date.yesterday) }
+
+      context 'when created_at is after merchant live_on date' do
+        let(:order) { build(:order, merchant: merchant, created_at: Date.today) }
+
+        it 'is valid' do
+          expect(order).to be_valid
+        end
+      end
+
+      context 'when created_at is before merchant live_on date' do
+        let(:order) { build(:order, merchant: merchant, created_at: merchant.live_on - 1.day) }
+
+        it 'is not valid' do
+          order.valid?
+          expect(order.errors[:created_at]).to include("must be greater than the merchant's live_on date")
+        end
+      end
+    end
+
   end
 end

@@ -13,6 +13,8 @@ gem "sprockets-rails"
 # gem "sqlite3", "~> 1.4"
 # using postgresql due to large number of records and to improve performance
 gem "pg"
+# using bulk import to import large dataset
+gem "activerecord-import"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
@@ -57,6 +59,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'factory_bot_rails'
 end
 
 group :development do

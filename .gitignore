@@ -11,6 +11,8 @@
 /db/*.sqlite3
 /db/*.sqlite3-*
 
+# ignore the seeds files
+db/seeds/
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
