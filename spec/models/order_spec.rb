@@ -87,7 +87,7 @@ RSpec.describe Order, type: :model do
 
         it 'is not valid' do
           order.valid?
-          expect(order.errors[:created_at]).to include("must be greater than the merchant's live_on date")
+          expect(order.errors[:created_at]).to include("must be greater than or equal to the merchant's live_on date")
         end
       end
     end
