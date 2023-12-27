@@ -1,0 +1,18 @@
+:queues:
+  - default
+:scheduler:
+  :dynamic: true
+  :enabled: true
+  :schedule:
+    daily_disbursement_job:
+      cron: "5 0 * * *"   # Runs at 00:05 every day
+      class: DailyDisbursementJob
+      queue: default
+    weekly_disbursement_job:
+      cron: "10 0 * * *"   # Runs at 00:10 every day
+      class: WeeklyDisbursementJob
+      queue: default
+    monthly_fee_calculation_job:
+      cron: "15 0 * * *"   # Runs at 00:15 every day
+      class: MonthlyFeeCalculationJob
+      queue: default
