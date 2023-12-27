@@ -31,3 +31,31 @@ total_amount_disbursed_2023 = Disbursement.where(disbursed_at: '2023-01-01'..'20
 
 amount_of_order_fee_2022 = Disbursement.where(disbursed_at: '2022-01-01'..'2022-12-31').sum(:commission)
 amount_of_order_fee_2023 = Disbursement.where(disbursed_at: '2023-01-01'..'2023-12-31').sum(:commission)
+
+
+
+if MonthlyFeeRecord.count > 0
+  puts 'MonthlyFeeRecord have already been generated'
+else
+  MonthlyFeeCalculatorService.process_historical_fees
+end
+
+number_of_monthly_fees_charged_2022 = MonthlyFeeRecord.where(record_month_date: '2022-01-01'..'2022-12-31').count
+number_of_monthly_fees_charged_2023 = MonthlyFeeRecord.where(record_month_date: '2023-01-01'..'2023-12-31').count
+amount_of_monthly_fees_charged_2022 = MonthlyFeeRecord.where(record_month_date: '2022-01-01'..'2022-12-31').sum(:fee)
+amount_of_monthly_fees_charged_2023 = MonthlyFeeRecord.where(record_month_date: '2023-01-01'..'2023-12-31').sum(:fee)
+
+puts "---------------------------"
+puts "year 2022"
+puts "Number of disbursements: #{number_of_disbursements_2022}"
+puts "Amount disbursed to merchants: #{total_amount_disbursed_2022}"
+puts "Amount of order fees #{amount_of_order_fee_2022}"
+puts "Number of monthly fees charged (From minimum monthly fee): #{number_of_monthly_fees_charged_2022}"
+puts "Amount of monthly fee charged (From minimum monthly fee): #{amount_of_monthly_fees_charged_2022}"
+puts "---------------------------"
+puts "year 2023"
+puts "Number of disbursements: #{number_of_disbursements_2023}"
+puts "Amount disbursed to merchants: #{total_amount_disbursed_2023}"
+puts "Amount of order fees #{amount_of_order_fee_2023}"
+puts "Number of monthly fees charged (From minimum monthly fee) #{number_of_monthly_fees_charged_2023}"
+puts "Amount of monthly fee charged (From minimum monthly fee) #{amount_of_monthly_fees_charged_2023}"
